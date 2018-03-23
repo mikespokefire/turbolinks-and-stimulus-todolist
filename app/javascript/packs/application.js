@@ -9,11 +9,17 @@
 
 console.log('Hello World from Webpacker')
 
-import { Turbolinks } from "turbolinks";
+const Rails = require("rails-ujs");
+const Turbolinks = require("turbolinks");
 import { Application } from "stimulus";
 import { definitionsFromContext } from "stimulus/webpack-helpers";
 
-Turbolinks.start()
+import '../styles/application.scss';
+
+// debugger;
+
+Rails.start();
+Turbolinks.start();
 
 const application = Application.start();
 const context = require.context("controllers", true, /.js$/);

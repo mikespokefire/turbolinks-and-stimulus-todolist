@@ -1,18 +1,23 @@
-// Visit The Stimulus Handbook for more details 
+// Visit The Stimulus Handbook for more details
 // https://stimulusjs.org/handbook/introduction
-// 
+//
 // This example controller works with specially annotated HTML like:
 //
 // <div data-controller="hello">
-//   <h1 data-target="hello.output"></h1>
+//   <input data-action="keyup->hello#greet" data-target="hello.name" type="text">
+//   <span data-target="hello.output"></span>
 // </div>
 
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "output" ]
+  static targets = [ "name", "output" ]
 
-  connect() {
-    this.outputTarget.textContent = 'Hello, Stimulus!'
+  greet() {
+    if (this.nameTarget.value) {
+      this.outputTarget.textContent = `Hello, ${this.nameTarget.value}!`;
+    } else {
+      this.outputTarget.textContent = "";
+    }
   }
 }

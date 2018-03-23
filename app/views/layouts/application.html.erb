@@ -10,5 +10,10 @@
 
   <body>
     <%= yield %>
+
+    <div data-controller="hello">
+      <input data-action="keyup->hello#greet" data-target="hello.name" type="text">
+      <span data-target="hello.output"></span>
+    </div>
   </body>
 </html>
