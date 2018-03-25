@@ -1,3 +1,9 @@
 body {
   background: #ccc;
 }
+
+.todo--completed {
+  text-decoration: line-through;
+  font-style: italic;
+  color: #666;
+}

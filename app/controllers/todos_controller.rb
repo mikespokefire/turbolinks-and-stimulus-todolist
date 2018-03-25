@@ -1,10 +1,11 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: [:show, :edit, :update, :destroy]
+  before_action :set_todo, only: [:show, :edit, :update, :destroy, :toggle]
 
   # GET /todos
   # GET /todos.json
   def index
-    @todos = Todo.all
+    @uncompleted_todos = Todo.uncompleted.all
+    @completed_todos = Todo.completed.all
   end
 
   # GET /todos/1
@@ -28,7 +29,7 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       if @todo.save
-        format.html { redirect_to @todo, notice: 'Todo was successfully created.' }
+        format.html { redirect_to todos_url, notice: 'Todo was successfully created.' }
         format.json { render :show, status: :created, location: @todo }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class TodosController < ApplicationController
   def update
     respond_to do |format|
       if @todo.update(todo_params)
-        format.html { redirect_to @todo, notice: 'Todo was successfully updated.' }
+        format.html { redirect_to todos_url, notice: 'Todo was successfully updated.' }
         format.json { render :show, status: :ok, location: @todo }
       else
         format.html { render :edit }
@@ -58,6 +59,16 @@ class TodosController < ApplicationController
     respond_to do |format|
       format.html { redirect_to todos_url, notice: 'Todo was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def toggle
+    @todo.completed = !@todo.completed
+    @todo.save!
+
+    respond_to do |format|
+      format.html { redirect_to todos_url, notice: 'Todo completeness toggled.' }
+      format.json { render :show, status: :ok, location: @todo }
     end
   end
 

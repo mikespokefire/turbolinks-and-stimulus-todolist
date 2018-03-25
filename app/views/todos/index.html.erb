@@ -2,28 +2,69 @@
 
 <h1>Todos</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Completed</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<p>
+  <%= link_to 'New Todo', new_todo_path %>
+</p>
 
-  <tbody>
-    <% @todos.each do |todo| %>
+<% if @uncompleted_todos.any? %>
+  <h2>Todos</h2>
+
+  <table>
+    <thead>
       <tr>
-        <td><%= todo.title %></td>
-        <td><%= todo.completed %></td>
-        <td><%= link_to 'Show', todo %></td>
-        <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
-        <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Title</th>
+        <th>Completed</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @uncompleted_todos.each do |todo| %>
+        <tr class="todo <%= 'todo--completed' if todo.completed %>">
+          <td><%= todo.title %></td>
+          <td>
+            <%= todo.completed %>
+            <%= link_to "toggle", toggle_todo_path(todo), remote: true, method: :post %>
+          </td>
+          <td><%= link_to 'Show', todo %></td>
+          <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
+          <td><%= link_to 'Destroy', todo, remote: true, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
-<%= link_to 'New Todo', new_todo_path %>
+<% if @completed_todos.any? %>
+  <h2>Completed Todos</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Completed</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @completed_todos.each do |todo| %>
+        <tr class="todo <%= 'todo--completed' if todo.completed %>">
+          <td><%= todo.title %></td>
+          <td>
+            <%= todo.completed %>
+            <%= link_to "toggle", toggle_todo_path(todo), remote: true, method: :post %>
+          </td>
+          <td><%= link_to 'Show', todo %></td>
+          <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
+          <td><%= link_to 'Destroy', todo, remote: true, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+    <div id="hello-world" data-controller="hello" data-turbolinks-permanent>
+      <input data-action="keyup->hello#greet" data-target="hello.name" type="text">
+      <span data-target="hello.output"></span>
+    </div>
