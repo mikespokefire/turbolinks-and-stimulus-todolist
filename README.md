@@ -1,24 +1,30 @@
-# README
+# Turbolinks and stimulus demo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Me playing about with turbolinks and stimulus.
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+```
+$ git clone git@github.com:mikespokefire/turbolinks-and-stimulus-todolist.git
+$ cd turbolinks-and-stimulus-todolist
+$ bundle install
+$ yarn install
+$ be rails db:create
+$ be rails db:schema:load
+```
 
-* System dependencies
+## Running
 
-* Configuration
+In 1 terminal:
 
-* Database creation
+```
+$ webpack-dev-server
+```
 
-* Database initialization
+In another terminal:
 
-* How to run the test suite
+```
+$ bundle exec rails server
+```
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Now visit [localhost:3000](http://localhost:3000) to view it in action.
