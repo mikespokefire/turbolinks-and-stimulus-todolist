@@ -9,6 +9,12 @@
   </head>
 
   <body>
+    <div id="flash-messages">
+      <% if flash.any? %>
+        <%= render partial: 'shared/flash_messages', local: { flash: flash } %>
+      <% end %>
+    </div>
+
     <%= yield %>
   </body>
 </html>

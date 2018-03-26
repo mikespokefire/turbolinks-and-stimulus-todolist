@@ -1,0 +1,4 @@
+// Make the relevent flash messages appear when necessary
+document.getElementById('flash-messages').innerHTML = "<%= j(render partial: 'shared/flash_messages', local: { flash: flash }) %>";
+
+<%= yield %>

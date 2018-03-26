@@ -1,0 +1,2 @@
+// Replace the form to show any errors and problems
+document.getElementById('frm-todo').innerHTML = "<%= j(render partial: 'form', locals: { todo: @todo }) %>";
